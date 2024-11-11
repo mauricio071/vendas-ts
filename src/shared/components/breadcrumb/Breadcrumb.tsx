@@ -1,4 +1,5 @@
 import { Breadcrumb as BreadcrumbAntd } from 'antd';
+import { BreadcrumbTestEnum } from './enum/breadcrumbTestIdEnum';
 
 export interface ListBreadcrumb {
   name: string;
@@ -11,11 +12,16 @@ interface BreadcrumbProps {
 
 function Breadcrumb({ listBreadcrumb }: BreadcrumbProps) {
   return (
-    <BreadcrumbAntd>
+    <BreadcrumbAntd data-testid={BreadcrumbTestEnum.CONTAINER}>
       {listBreadcrumb.map((breadcrumb, index) => (
-        <BreadcrumbAntd.Item key={`breadcrumb_${index}`}>
+        <BreadcrumbAntd.Item data-testid={BreadcrumbTestEnum.ITEM} key={`breadcrumb_${index}`}>
           {breadcrumb.navigateTo ? (
-            <a href={breadcrumb.navigateTo || ''}>{breadcrumb.name}</a>
+            <a
+              data-testid={BreadcrumbTestEnum.CONTAINER_NAVIGATE}
+              href={breadcrumb.navigateTo || ''}
+            >
+              {breadcrumb.name}
+            </a>
           ) : (
             breadcrumb.name
           )}

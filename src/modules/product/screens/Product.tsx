@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { ProductType } from '../../../shared/types/ProductTypes';
-import { Input, TableProps } from 'antd';
+import { Input, Modal, TableProps } from 'antd';
 import Table from '../../../shared/components/table/Table';
 import CategoryColumn from '../components/CategoryColumn';
 import TooltipImage from '../components/TooltipImage';
@@ -52,7 +52,7 @@ function Product() {
         render: (_, product) => <a>{convertNumberToMoney(product.price)}</a>,
       },
       {
-        title: 'Action',
+        title: 'Ações',
         dataIndex: '',
         key: 'x',
         width: 240,
@@ -67,7 +67,7 @@ function Product() {
                 Editar
               </Button>
               <Button
-                onClick={() => handleDeleteProduct(product.id)}
+                onClick={() => handleOpenModalDelete(product.id)}
                 icon={<DeleteOutlined />}
                 danger
               >
@@ -87,10 +87,23 @@ function Product() {
     productsFiltered,
     handleDeleteProduct,
     handleEditProduct,
+    openModalDelete,
+    handleCloseModalDelete,
+    handleOpenModalDelete,
   } = useProduct();
 
   return (
     <Screen listBreadcrumb={listBreadcrumb}>
+      <Modal
+        title="Atenção"
+        open={openModalDelete}
+        onOk={handleDeleteProduct}
+        onCancel={handleCloseModalDelete}
+        okText="Sim"
+        cancelText="Cancelar"
+      >
+        <p>Tem certeza que deseja excluir esse produto?</p>
+      </Modal>
       <DisplayFlexJustifyBetween margin="0px 0px 16px 0px">
         <LimitedContainer width={240}>
           <Search placeholder="Buscar produto" onSearch={onSearch} enterButton />

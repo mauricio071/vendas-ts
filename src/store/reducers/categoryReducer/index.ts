@@ -3,10 +3,12 @@ import { CategoryType } from '../../../shared/types/CategoryType';
 
 interface CategoryState {
   categories: CategoryType[];
+  category?: CategoryType;
 }
 
 const initialState: CategoryState = {
   categories: [],
+  category: undefined,
 };
 
 export const counterSlice = createSlice({
@@ -16,9 +18,12 @@ export const counterSlice = createSlice({
     setCategoriesAction: (state, action: PayloadAction<CategoryType[]>) => {
       state.categories = action.payload;
     },
+    setCategoryAction: (state, action: PayloadAction<CategoryType | undefined>) => {
+      state.category = action.payload;
+    },
   },
 });
 
-export const { setCategoriesAction } = counterSlice.actions;
+export const { setCategoriesAction, setCategoryAction } = counterSlice.actions;
 
 export default counterSlice.reducer;

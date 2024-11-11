@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import Header from '../Header';
 import { HeaderTestIdEnum } from '../enum/headerTestIdEnum';
 import { logout } from '../../../functions/connection/auth';

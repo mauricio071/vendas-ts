@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Input, { InputProps } from '../input/input';
+import { InputMoneyTestId } from './enum/inputMoneyTestIdEnum';
 
 interface InputMoneyProps extends InputProps {
   value: number;
@@ -37,7 +38,13 @@ function InputMoney({ value, onChange, addonBefore = 'R$', ...props }: InputMone
   };
 
   return (
-    <Input addonBefore={addonBefore} value={currentValue} onChange={handleOnChange} {...props} />
+    <Input
+      data-testid={InputMoneyTestId.INPUT}
+      addonBefore={addonBefore}
+      value={currentValue}
+      onChange={handleOnChange}
+      {...props}
+    />
   );
 }
 

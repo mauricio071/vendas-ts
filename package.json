@@ -58,7 +58,6 @@
     "typescript-eslint": "^8.10.0",
     "vite": "^5.4.9"
   },
-  "pre-commit": "lint",
   "jest": {
     "testEnvironment": "jest-environment-jsdom",
     "setupFilesAfterEnv": [

@@ -14,6 +14,8 @@ export const useProduct = () => {
 
   const [productsFiltered, setProductsFiltered] = useState<ProductType[]>([]);
 
+  const [productIdDelete, setProductIdDelete] = useState<number | undefined>();
+
   useEffect(() => {
     const productsWithKeys = products.map((product) => ({
       ...product,
@@ -42,9 +44,18 @@ export const useProduct = () => {
     navigate(ProductRoutesEnum.PRODUCT_EDIT.replace(':productId', `${productId}`));
   };
 
-  const handleDeleteProduct = async (productId: number) => {
-    await request(URL_PRODUCT_ID.replace('{productId}', `${productId}`), MethodsEnum.DELETE);
+  const handleDeleteProduct = async () => {
+    await request(URL_PRODUCT_ID.replace('{productId}', `${productIdDelete}`), MethodsEnum.DELETE);
     await request(URL_PRODUCT, MethodsEnum.GET, setProducts);
+    setProductIdDelete(undefined);
+  };
+
+  const handleCloseModalDelete = () => {
+    setProductIdDelete(undefined);
+  };
+
+  const handleOpenModalDelete = (productId: number) => {
+    setProductIdDelete(productId);
   };
 
   return {
@@ -53,5 +64,8 @@ export const useProduct = () => {
     productsFiltered,
     handleDeleteProduct,
     handleEditProduct,
+    openModalDelete: !!productIdDelete,
+    handleCloseModalDelete,
+    handleOpenModalDelete,
   };
 };

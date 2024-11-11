@@ -1,0 +1,5 @@
+export enum BreadcrumbTestEnum {
+  CONTAINER = 'CONTAINER',
+  ITEM = 'ITEM',
+  CONTAINER_NAVIGATE = 'CONTAINER_NAVIGATE',
+}
